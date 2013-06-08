@@ -7,9 +7,10 @@ class Videoconference < ActiveRecord::Base
  
   before_create  { generate_token(:conference_token) }
 
-  self.generate_token(column)
+  def self.generate_token(column)
     begin
       self[column] = SecureRandom.urlsafe_base64
     end while Videoconference.exists?(column => self[column]) 
   end
+
 end
