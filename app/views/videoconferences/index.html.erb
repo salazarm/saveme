@@ -1,25 +1,2 @@
-<h1>Listing videoconferences</h1>
-
-<table>
-  <tr>
-    <th>Saver</th>
-    <th>Savee</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @videoconferences.each do |videoconference| %>
-  <tr>
-    <td><%= videoconference.saver %></td>
-    <td><%= videoconference.savee %></td>
-    <td><%= link_to 'Show', videoconference %></td>
-    <td><%= link_to 'Edit', edit_videoconference_path(videoconference) %></td>
-    <td><%= link_to 'Destroy', videoconference, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Videoconference', new_videoconference_path %>
+<a class="sbutton">I need help</a>
+<a class="sbutton">I want to help</a>

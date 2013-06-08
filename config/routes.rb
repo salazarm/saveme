@@ -1,5 +1,8 @@
 Saveme::Application.routes.draw do
   resources :videoconferences
+  resources :person
+
+  root :to => "videoconferences#index"
 
 
   # The priority is based upon order of creation:

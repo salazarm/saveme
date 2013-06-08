@@ -12,7 +12,6 @@ class Person < ActiveRecord::Base
    
   validates :password, :length => (6..32), :confirmation => true, :if => :setting_password?
 
-    #something@something.something
   validates :email, :uniqueness => true, 
               :format => {:with => VALID_EMAIL_REGEX },
               :unless => "is_anon"
