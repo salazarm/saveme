@@ -1,5 +1,5 @@
 class Videoconference < ActiveRecord::Base
-  attr_accessible :savee, :saver, :savee_rating, :saver_rating
+  attr_accessible :savee, :saver, :savee_rating, :saver_rating, :savee_id, :saver_id
 
   has_one :savee, :through => :person
   has_one :saver, :through => :person

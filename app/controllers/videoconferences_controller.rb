@@ -24,12 +24,8 @@ class VideoconferencesController < ApplicationController
   # GET /videoconferences/new
   # GET /videoconferences/new.json
   def new
-    @videoconference = Videoconference.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @videoconference }
-    end
+     Pusher['queue'].trigger('add', {:type => params[:type] })
+     render :nothing => true
   end
 
   # GET /videoconferences/1/edit

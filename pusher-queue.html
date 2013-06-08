@@ -1,0 +1,73 @@
+<html>
+<head>
+	<title>Saviour Queue</title>
+	<script src="http://js.pusher.com/2.0/pusher.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+</head>
+<body>
+	<div style="clear: both;">
+		<div style="width: 50%; float:left;">
+
+		</div>
+		<div style="width:50%;">
+
+		</div>
+	</div>
+	<script>
+		var SQueue = function(){
+			var pusher = new Pusher('46055');
+			var saviours = [];
+			var savees = [];
+
+			function connect(saviour, savee){
+				$.ajax({
+					type: "POST"
+					url: "/videoconference",
+					data: {
+						videoconference: {
+							savee_id: savee.id,
+							saviour_id: saveiour.id
+						}
+					},
+					success: function(data, status,jqXHR){
+
+					},
+
+					error: function(){
+						
+					}
+				});
+			}
+
+			function tryToConnect(){
+				if (saviours.length !== 0 && savees.length !== 0){
+					pusherConnect(saviours.shift(), savees.shift());
+				}
+			}
+
+			return {
+				function saviours(){
+					return saviours;
+				}(),
+
+				function savees(){
+					return savees;
+				}(),
+
+				function addSaviour(person){
+					tryToConnect();
+					saviours.push(person);
+				},
+
+				function addSavee(person){
+					tryToConnect();
+					savee.push(person);
+				}
+			}
+
+		}
+		var SaviourQueue = new SQueue();
+
+	</script>
+</body>
+</html>
