@@ -1,5 +1,5 @@
 class Person < ActiveRecord::Base
-    VALID_EMAIL_REGEX = /^.+@.+\..+$/i 
+  VALID_EMAIL_REGEX = /^.+@.+\..+$/i 
   attr_accessible :image, :ip, :is_anon, :name, :password, :password_confirmation, :email
   attr_accessor :password, :password_confirmation
 
