@@ -5,7 +5,7 @@ class Videoconference < ActiveRecord::Base
   has_one :saver, :through => :person
   has_many :messages
  
-  before_create :generate_token(conference_token)
+  before_create  { generate_token(:conference_token) }
 
   self.generate_token(column)
     begin
