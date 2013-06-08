@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Saver:</b>
+  <%= @videoconference.saver %>
+</p>
+
+<p>
+  <b>Savee:</b>
+  <%= @videoconference.savee %>
+</p>
+
+
+<%= link_to 'Edit', edit_videoconference_path(@videoconference) %> |
+<%= link_to 'Back', videoconferences_path %>
