@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130609041156) do
+ActiveRecord::Schema.define(:version => 20130609045134) do
 
   create_table "messasges", :force => true do |t|
     t.integer  "videoconference_id"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(:version => 20130609041156) do
     t.integer  "saver_id"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.string   "auth_token"
   end
 
 end

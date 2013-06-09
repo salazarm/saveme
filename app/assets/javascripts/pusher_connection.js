@@ -1,22 +1,30 @@
-var PusherConnection = function(id) {
+var PusherConnection = function(id, _view) {
 	var pusher = new Pusher('15d403a27437d1df3be4');
-	var channel = pusher.subscribe("private-"+id);
+	console.log("on ", {"channel: ": id })
+	var channel = pusher.subscribe("client-"+id);
 	var messageChannel;
 	var messages = [];
 	var messageView;
 	var _sendMessage;
 	var other;
 	var conferenceSession;
+	var view = _view;
 
-	channel.bind("private-"+id, function(data) {
-		messageChannel = pusher.subscribe(data.token);
+	channel.bind("private-token", function(data) {
+		console.log({'got token: ': data.token});
+		conferenceSession = data.token;
+		messageChannel = pusher.subscribe('client-'+conferenceSession);
 		
+		console.log("Binded to messages");
 		messageChannel.bind('client-message', function(data){
-			Application.newMessage(data);
+			console.log("received message");
+			view.newMessage(data);
 		});
 
+		console.log("Binded to disconnects");
 		messageChannel.bind('client-disconnect', function(data){
-			Application.partnerDisconnected();
+			console.log("other person dc.")
+			view.partnerDisconnected();
 		});
 
 		// Handle user disconnecting
@@ -31,6 +39,7 @@ var PusherConnection = function(id) {
 			}
 
 		_sendMessage = function(message){
+			console.log("message sent");
 			messageChannel.trigger('client-message', { message: message });
 		}
 	});
