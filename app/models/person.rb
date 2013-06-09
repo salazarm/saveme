@@ -6,7 +6,7 @@ class Person < ActiveRecord::Base
   before_create { generate_token(:auth_token) }
   has_one :schedule
   has_many :videoconferences
-
+  has_and_belongs_to_many :incident_reports
 
   before_validation :downcase_email
 

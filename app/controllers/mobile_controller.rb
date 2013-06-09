@@ -25,4 +25,15 @@ class MobileController < ActionController::Base
   def respond
     @incidentReports = IncidentReport.all.reverse
   end
+
+  def help
+    @incident_report = IncidentReport.find_by_id(params[:id])
+    if @current_user && @incident_report
+      @incident_report.users << @current_user
+      @incident_report.save
+      render :nothing => true, :status => 200
+    else
+      render :nothing => true, :status => 500
+    end
+  end 
 end

@@ -4,4 +4,7 @@ class IncidentReport < ActiveRecord::Base
   validates :description, :presence => true
   validates :latitude,    :presence => true
   validates :longitude,   :presence => true
+
+  has_and_belongs_to_many :people
+
 end

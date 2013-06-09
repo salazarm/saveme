@@ -21,6 +21,13 @@ html {
  	background-color: #087135;;
   font-family: 'Lato', sans-serif;
 }
+
+.number {
+	padding: 4px;
+	background-color: #087135;
+	color: #fff;
+}
+
  body {
  	padding: 0;
  	margin: 0;

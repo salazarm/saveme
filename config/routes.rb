@@ -4,6 +4,8 @@ Saveme::Application.routes.draw do
   match "/joinqueue" => "videoconferences#join_queue"
   match "/videoconference" => "videoconferences#create"
   match 'people' => "people#create", :via => ["post"]
+  match "/login" => "sessions#create", :via => ["post"]
+  match "/logout" => "session#destroy"
 
   root :to => "videoconferences#index"
 
@@ -14,6 +16,7 @@ Saveme::Application.routes.draw do
   match '/mobile/report'      => 'mobile#report', :as => :incident_reports, :via => ["get"]
   match '/mobile/report'      => 'mobile#submit_report', :as => :submit_report, :via => ["post"]
   match '/mobile/respond'     => 'mobile#respond', :as => :respond
+  match '/mobile/help'        => 'mobile#help', :via => ["post"]
   #match '/sms/incoming'       => 'twilio#incoming_sms'
 
 

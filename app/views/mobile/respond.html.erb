@@ -4,20 +4,36 @@
 <div class="container">
 	There are no incidents to respond to !
 </div>
-
 <% else %>
 
-	<div id="map-canvas" class="awesome-box" style="margin: 20px auto; width: 750px; height: 500px;"></div>
+	<div id="map-canvas" class="awesome-box" style="margin: 20px auto; width: 600px; height: 600px; border-radius: 200px;"></div>
 <% end %>
 
 <script type="text/template" id="google-popup-template">
-  [[= description ]]
+  <div><strong>[[= description ]]</strong></div>
+  <div>[[= people.length==0? "Be the first to aid this person!" :"<span class='number'>"+people.length+"</span> going to aid this person, join them?" ]]</div>
+  <% if @current_user && !@current_user.isAnon %> 
+	  <button class="helper-button" data-id="[[= id ]]"class="btn btn-success">Aid this person!</button>
+  <% else %>
+  	<div style="padding: 10px 0px; backgrround-color: ">Signup above to let your fellow samaritans know that you are coming to aid this person!</div>
+  <% end %>
 </script>
 <script>
 _.templateSettings = {
     interpolate: /\[\[\=(.+?)\]\]/g,
     evaluate: /\[\[(.+?)\]\]/g
 	};
+
+	$(".helper-button").click(function(){
+		var id = this.data('id');
+		$.ajax({
+			url: "/mobile/help",
+			data: {
+				id : id
+			},
+			type: "POST"
+		});
+	});
 
 <% if @incidentReports.length > 0 %>
 	$(document).ready(function(){
@@ -39,7 +55,8 @@ _.templateSettings = {
 	        map: map,
 	      });
 
-	      var content = g_template(<%= raw listing.to_json %>);
+	      console.log(<%= raw listing.to_json(:include => :people ) %>);
+	      var content = g_template(<%= raw listing.to_json(:include => :people ) %>);
 
 	      makeInfoWindowEvent(map, infowindow, content, marker, <%= listing.id %>);
 
