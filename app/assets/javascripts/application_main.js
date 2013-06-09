@@ -3,10 +3,12 @@ var Application = {
 	applicationView: null,
 	messageView: null,
 	pusherConnection: null,
+	id: null,
+	type: null,
 
 	init: function() {
 		console.log("--Application Init---");
-		var id = window.person_id;
+		id = window.person_id;
 		var ip;
 
 		function retrieveId(){
@@ -47,6 +49,7 @@ var Application = {
 
 		$("#savee").click(function() {
 			// create an anonymous person
+			Application.type = 1;
 			$.ajax({
 				url: "http://jsonip.appspot.com/", 
 				success: function(data, status, jqXHR){
@@ -69,6 +72,7 @@ var Application = {
 		});
 
 		$("#saviour").click(function() {
+			Application.type = 2;
 			joinQueue("saviour");
 			if(id != null) {
 				actualInit(id);

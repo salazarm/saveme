@@ -17,53 +17,77 @@ html {
 	min-height: 100%;
 	margin: 0;
 	padding: 0;
- 	background-color: #FFE39C;
- 	font-family: 'Open Sans';
+ 	background-color: #087135;;
+  font-family: 'Lato', sans-serif;
 }
  body {
  	padding: 0;
  	margin: 0;
-	background-color: inherit;
+	font-family: 'Lato', sans-serif;
  }
+
+	#login-popup, #signup-popup {
+		background-color: rgba(100,100,10,.3);
+		padding: 10px;
+		border-radius: 7px;
+		border: 1px solid rgba(0,0,0,.3);
+	}
+
+textarea { resize:none; }
+
+#video-chat {
+	height: 100px;
+	margin: 40px 0px;
+}
+#message-box {
+	width: 300px;
+	margin-top: 30px;
+	margin-right: 20px;
+}
+
+#messaging {
+	padding: 10px;
+}
+
 
  #nav-bar {
  	min-width: 600px;
  	clear: both;
  	height: 30px;
  	margin: 0;
-	color: #444;
-	padding: 10px 20px 11px 20px;
-	background-color: #8BD6A0;
-	font-size: 24px;
+	padding: 0px 20px 25px 20px;
+	background-color: #09612E;;
+	font-family: 'Lato', sans-serif;
+	/*Apply this class to some text to unlock the secrets of the third dimension!*/
+	color: #fff9d6;
+	margin-top: -10px;
+	font-weight:bold;
+	font-size: 32px;
+	text-shadow:0px 0px 0 rgb(206,206,206),-1px 1px 0 rgb(188,188,188),-2px 2px 0 rgb(169,169,169), -3px 3px 0 rgb(150,150,150),-4px 4px 3px rgba(0,0,0,0),-4px 4px 1px rgba(0,0,0,0.5),0px 0px 3px rgba(0,0,0,.2);
+	border-bottom: 3px solid #043D1D;
 }
 
 #nav-bar .nav-text{
 	line-height: 40px;
 }
 
-#messaging {
-	margin-left: 50px;
+#login, #signup {
+	margin-top: 18px;
 }
-
-
-#login {
-	padding: 2px 5px;
-	background-color: #F3F757;
-	color: #2E7544;
-	border-radius: 5px;
-	cursor: pointer;
-}
-
 
 .self_message:after, .message:after {
 	clear: right;
 }
 
+.OT_video-container {
+	padding: 10px;
+	border: 1px solid rgba(0,0,0,.2);
+}
 
-
-#login:hover {
-		background-color: #2E7544;
-		color: #F3F757;
+#main {
+	margin: 0 auto;
+	width: 800px;
+	padding: 30px;
 }
 
  .left {
@@ -90,11 +114,59 @@ html {
 	display:inline-block;
 	color:#306108;
 	font-family:arial;
-	font-size:15px;
+	font-size:45px;
+	line-height: 60px;
 	font-weight:bold;
 	padding:6px 24px;
 	text-decoration:none;
 	text-shadow:1px 1px 0px #aade7c;
+}
+
+#messages {
+	width:100%;
+	margin-top: 20px;
+	background-color: rgba(255,255,255,.3);
+	border: 1px solid rgba(0,0,0,.4);
+	border-radius: 3px;
+	height: 250px;
+	text-overflow: none;
+	overflow: auto;
+}
+
+.message, .self_message {
+	padding: 1px 3px;
+	font-size: 12px;
+}
+
+#textsubmit {
+	font-size:15px;
+	line-height: 20px;
+	margin-top: 15px;
+	display: inherit;
+	width: 50px;
+}
+
+.pimage {
+	background-color: #fff;
+	border-radius: 5px;
+	padding: 3px;
+	background-position: 3px 3px;
+	background-repeat: no-repeat;
+	border: 1px solid: rgba(0,0,0,.1);
+	margin-bottom: 6px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#signup-image {
+	font-size: 13px;
+	text-shadow: none;
+	font-family: arial;
+	padding: 3px 5px;
+	background-color: rgba(0,0,0,.3);
+	border-radius: 5px;
+	cursor: pointer;
+	margin-bottom: 5px;
 }
 .sbutton:hover {
 	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #5cb811), color-stop(1, #77d42a) );
@@ -105,4 +177,21 @@ html {
 .sbutton:active {
 	position:relative;
 	top:1px;
+}
+
+#hints {
+	background-color: #77d42a;
+	-webkit-box-shadow: inset 0px 1px 0px 0px #caefab;
+	box-shadow: inset 0px 1px 0px 0px #caefab;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+	border: 1px solid #268a16;
+	padding: 6px 24px;
+	text-decoration: none;
+	text-shadow: 1px 1px 0px #aade7c;
+
+}
+
+.hint {
+	padding: 4px 0px;
 }

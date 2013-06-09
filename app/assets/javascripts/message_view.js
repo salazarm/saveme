@@ -6,9 +6,12 @@ var MessageView = function(id){
 
 	return {
 		newMessage: function(message){
-			console.log("Appending Message")
-			console.log(messageTemplate(message));
-			$("#messages").append(messageTemplate(message));
+			if (Application.type == 1){
+				message.name = 'Samaritan';
+			} else {
+				message.name = 'Person in need';
+			}
+			$("#messages").prepend(messageTemplate(message));
 		}
 	}
 }

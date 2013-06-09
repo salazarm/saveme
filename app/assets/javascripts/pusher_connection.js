@@ -15,10 +15,11 @@ var PusherConnection = function(id, _view) {
 
 		var text = $("#message-box").val();
 		PC.sendMessage( text );
-		view.newMessage( {message: text} );
+		view.newMessage( {message: text, self: true } );
 		$("#message-box").val('');
 		return false;
 	})
+
 
 	console.log("binded to private-token");
 	channel.bind("private-token", function(data) {
@@ -31,6 +32,8 @@ var PusherConnection = function(id, _view) {
 		console.log("Binded to messages");
 		messageChannel.bind('client-message', function(data){
 			console.log("received message");
+			data.self = false;
+			console.log(data);
 			view.newMessage(data);
 		});
 
@@ -38,6 +41,14 @@ var PusherConnection = function(id, _view) {
 		messageChannel.bind('client-disconnect', function(data){
 			console.log("other person dc.")
 			view.partnerDisconnected();
+		});
+
+		messageChannel.bind('client-video-on', function(){
+
+		});
+
+		$("#video-chat").click(function(){
+			messageChannel.trigger('client-video-on',{});
 		});
 
 		// Handle user disconnecting
@@ -53,7 +64,8 @@ var PusherConnection = function(id, _view) {
 
 		console.log("added sendMessage");
 		PC.sendMessage = function(message){
-			console.log("message sent");
+			console.log(message);
+			message.self = false;
 			messageChannel.trigger('client-message', { message: message });
 		}
 	});

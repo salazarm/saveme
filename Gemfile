@@ -25,7 +25,7 @@ end
 
 gem 'pusher'
 gem 'jquery-rails'
-gem 'bcrypt-ruby'
+gem 'bcrypt-ruby', :require => "bcrypt" 
 gem 'pusher'
 gem 'twilio-ruby'
 

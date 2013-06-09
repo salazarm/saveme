@@ -1,40 +1,130 @@
 <!DOCTYPE html>
-<html>
+<html style="min-width: 1000px;">
 <head>
   <title>Saviour</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
+  <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+  <link href='http://fonts.googleapis.com/css?family=Lato:400,900' rel='stylesheet' type='text/css'>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+
   <script src='https://swww.tokbox.com/webrtc/v2.0/js/TB.min.js'></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
   <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
   <script src="http://js.pusher.com/2.0/pusher.min.js" type="text/javascript"></script>
 </head>
-<body>
+<body style="background: url('http://uexel.us/themes/majoo/images/bg/brushed_alu.png') repeat scroll #f4f4f4; height: auto;">
   <script>window.person_id=<%=@current_user? @current_user.id : ''%>;</script>
 	<div id="nav-bar">
-		<div class="left nav-text">
-			Saviour
+		<div class="pull-left">
+			<h3>Saviour</h3>
 		</div>
-		<div class="right nav-text">
-			<span id="login">Login</span>
+		<div class="right nav-text" id="auth" style='display: <%=@current_user? "block;" : "none;" %>'>
+			<span id="login" class="btn btn-success">Login</span>
+      <ul id="login-popup" style="display: none; position: absolute; margin-left: -160px; width: 220px; padding-top:15px; margin-top:5px;">
+        <input placeholder="email" type="email" style="display: block;"></input>
+        <input placeholder="password" type="password" style="display: block;"></input>
+        <div style="text-align:center">
+          <button class="btn btn-success" id="login-btn">Submit</button>
+          <button id="close" class="btn">Close</button>
+        </div>
+      </ul>
+      <span id="signup" class="btn btn-success">Sign Up</span>
+      <ul id="signup-popup" style="display: none; position: absolute; margin-left: -160px; width: 220px; padding-top:15px; margin-top:5px;">
+        <input id="signup-name" placeholder="name" type="text" style="display: block;"></input>
+        <input id="signup-email" placeholder="email" type="email" style="display: block;"></input>
+        <input placeholder="password" id="signup-password" type="password" style="display: block;"></input>
+        <input placeholder="confirm password" id="signup-confirm" type="password" style="display: block;"></input>
+        <div id="signup-image" style="text-align: center;">Pick a Profile picture</div>
+        <div id="profile-image" style="margin: 0 55px;"></div>
+        <div style="text-align:center">
+          <button class="btn btn-success" id="signup-btn">Submit</button>
+          <button id="close2" class="btn">Close</button>
+        </div>
+      </ul>
 		</div>
 	</div>
 
 <%= yield %>
-
+<script type="text/javascript" src="//api.filepicker.io/v1/filepicker.js"></script>
+<script>
+  var profile_image ='';
+  filepicker.setKey("ANiojec3SRKijkj9dvLmGz");
+  $("#signup-image").click(function(){
+    filepicker.pickAndStore({
+          mimetype:"image/*",
+          'multiple': false,
+          services:['COMPUTER', 'FACEBOOK', 'GMAIL'],
+        },
+        {
+          location:"S3",
+        }, 
+        function(fpfiles){
+          _.each(fpfiles, function(file){
+            $("#profile-image").html('');
+            image = "<img class='pimage' src='"+file.url+"' width='100px' height='100px'></img>";
+            $("#profile-image").append(image);
+            profile_image = file.url;
+          });
+      });
+  });
+</script>
  <script type="text/javascript">
     _.templateSettings = {
         interpolate: /\[\[\=(.+?)\]\]/g,
         evaluate: /\[\[(.+?)\]\]/g
     };
 </script>
-
-
-
-
 </body>
 <script>
+  $("#close,#close2").click(function(){
+    $("#login-popup").hide();
+    $("#signup-popup").hide();
+  });
+  $("#login").click(function(){
+    $("#signup-popup").hide();
+    $("#login-popup").show();
+  });
+  $("#signup").click(function(){
+    $("#signup-popup").show();
+    $("#login-popup").hide();
+  });
+  $("#signup-btn").click(function(){
+    console.log("clicked signup");
+    var email = $("#signup-email").val();
+    var name = $("#signup-name").val();
+    var password = $("#signup-password").val();
+    var confirm = $("#signup-confirm").val();
+    $.ajax({
+      url: "/people",
+      type: "POST",
+      data: {
+        person: {
+          email : email,
+          password : password,
+          password_confirmation : confirm,
+          name : name,
+          image: profile_image 
+        }, 
+
+        success : function(){
+          console.log("SUCCESS LOGIN");
+          $("#signup-email").val('');
+          $("#signup-name").val('');
+          $("#signup-password").val('');
+          $("#signup-confirm").val('');
+          $("#profile-image").html('');
+          $("#close").trigger("click");
+          $("#auth").hide();
+        },
+
+        error : function(){
+          console.log("ERROR LOGIN");
+        }
+      }
+    });
+  });
+
 	var application = Application.init();
 </script>
 </html>
