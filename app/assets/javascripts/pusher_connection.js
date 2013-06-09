@@ -13,8 +13,9 @@ var PusherConnection = function(id, _view) {
 	$("#textsubmit").click(function(ev){
 		ev.preventDefault();
 
-		console.log($("#message-box"));
-		PC.sendMessage( $("#message-box").val());
+		var text = $("#message-box").val();
+		PC.sendMessage( text );
+		view.newMessage( {message: text} );
 		$("#message-box").val('');
 		return false;
 	})

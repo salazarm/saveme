@@ -41,6 +41,11 @@ html {
 	line-height: 40px;
 }
 
+#messaging {
+	margin-left: 50px;
+}
+
+
 #login {
 	padding: 2px 5px;
 	background-color: #F3F757;
@@ -48,6 +53,13 @@ html {
 	border-radius: 5px;
 	cursor: pointer;
 }
+
+
+.self_message:after, .message:after {
+	clear: right;
+}
+
+
 
 #login:hover {
 		background-color: #2E7544;

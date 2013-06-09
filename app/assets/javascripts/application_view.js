@@ -2,10 +2,10 @@ var ApplicationView = function(id){
 	console.log("Application View Created");
 	messageView = new MessageView(id);
 	$("#main").slideUp(500);
-	$("#messaging").slideDown();
+	$("#spinner").slideDown(500);
 	return {
 	 	newMessage: function(message){
-	 		messagesView.append(message);
+	 		messageView.newMessage(message);
 	 	},
 
 	 	closeConnection: function(){

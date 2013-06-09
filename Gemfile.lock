@@ -64,6 +64,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.23)
     multi_json (1.7.6)
+    pg (0.15.1-x86-mingw32)
     polyglot (0.3.3)
     pusher (0.11.3)
       multi_json (~> 1.0)
@@ -129,6 +130,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   debugger
   jquery-rails
+  pg
   pusher
   rails (= 3.2.12)
   sass-rails (~> 3.2.3)
