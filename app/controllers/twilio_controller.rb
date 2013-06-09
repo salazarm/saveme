@@ -2,6 +2,22 @@ require 'twilio-ruby'
 
 class TwilioController < ApplicationController
 
+  # GET /help_me
+  def help_me
+    d = DateTime.now
+    day = d.wday
+    time = d.to_time.strftime("%H:%M")
+
+    timeslots = Timeslot.where('day = ? and start_time <= ? and end_time >= ?', day, time, time)
+    unless timeslots.blank?
+      people = timeslots.map {|t| t.schedule.person}.uniq unless timeslots.blank?
+      people.reject! {|p| p.in_call == true}
+      #people.first.phone
+      #debugger; 0
+    end
+
+  end
+
   # GET /hello-monkey
   def hello_monkey
     

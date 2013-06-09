@@ -1,6 +1,6 @@
 class Person < ActiveRecord::Base
   VALID_EMAIL_REGEX = /^.+@.+\..+$/i 
-  attr_accessible :image, :ip, :is_anon, :name, :password, :password_confirmation, :email, :phone
+  attr_accessible :image, :ip, :is_anon, :name, :password, :password_confirmation, :email, :phone, :in_call
   attr_accessor :password, :password_confirmation
 
   before_create { generate_token(:auth_token) }
