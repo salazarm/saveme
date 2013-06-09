@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130608204522) do
+ActiveRecord::Schema.define(:version => 20130609034939) do
 
   create_table "messasges", :force => true do |t|
     t.integer  "videoconference_id"
@@ -28,6 +28,23 @@ ActiveRecord::Schema.define(:version => 20130608204522) do
     t.string   "image"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "phone"
+  end
+
+  create_table "schedules", :force => true do |t|
+    t.integer  "person_id"
+    t.integer  "timeslot_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "timeslots", :force => true do |t|
+    t.integer  "schedule_id"
+    t.integer  "day"
+    t.string   "start_time"
+    t.string   "end_time"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "videoconferences", :force => true do |t|

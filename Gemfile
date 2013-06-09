@@ -23,6 +23,8 @@ end
 gem 'pusher'
 gem 'jquery-rails'
 gem 'bcrypt-ruby'
+gem 'pusher'
+gem 'twilio-ruby'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
@@ -37,4 +39,4 @@ gem 'bcrypt-ruby'
 # gem 'capistrano'
 
 # To use debugger
-# gem 'debugger'
+gem 'debugger'
