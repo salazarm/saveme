@@ -1,12 +1,15 @@
 class Person < ActiveRecord::Base
   VALID_EMAIL_REGEX = /^.+@.+\..+$/i 
-  attr_accessible :image, :ip, :is_anon, :name, :password, :password_confirmation, :email
+  attr_accessible :image, :ip, :is_anon, :name, :password, :password_confirmation, :email, :phone
   attr_accessor :password, :password_confirmation
 
   before_create { generate_token(:auth_token) }
+  has_one :schedule
+
 
   before_validation :downcase_email
 
+  # NOT validating presence_of :phone, since person may only want to use the web interface
   validates_presence_of :email, :password, :password_confirmation, 
                           :on => :create, :unless => "is_anon"
    
