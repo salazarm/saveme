@@ -1,9 +1,11 @@
 Saveme::Application.routes.draw do
-  resources :videoconferences
-  resources :person
+  resources :people, :only => ['create', 'show'] 
+  resources :message, :only => ['create']
+  resources :videoconferences, :only => ['index']
 
   root :to => "videoconferences#index"
 
+  match "/pusher/auth" => "pusher#auth"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
