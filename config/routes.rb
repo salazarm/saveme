@@ -7,10 +7,11 @@ Saveme::Application.routes.draw do
 
   root :to => "videoconferences#index"
 
-  match "/pusher/auth" => "pusher#auth"
-  match '/help_me'     => 'twilio#help_me'
-  match '/hello-monkey' => 'twilio#hello_monkey', :as => 'hello_monkey'
-  match '/hello-monkey/handle-gather' => 'twilio#handle_gather', :as => 'handle_gather'
+  match "/pusher/auth"        => "pusher#auth"
+  match '/help_me'            => 'twilio#help_me'
+  match '/help_me/call_ended' => 'twilio#call_ended'
+  #match '/sms/incoming'       => 'twilio#incoming_sms'
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
