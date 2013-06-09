@@ -10,6 +10,9 @@ Saveme::Application.routes.draw do
   match "/pusher/auth"        => "pusher#auth"
   match '/help_me'            => 'twilio#help_me'
   match '/help_me/call_ended' => 'twilio#call_ended'
+  match '/mobile'             => 'mobile#index'
+  match '/mobile/report'      => 'mobile#report', :as => :report
+  match '/mobile/respond'     => 'mobile#respond', :as => :respond
   #match '/sms/incoming'       => 'twilio#incoming_sms'
 
 

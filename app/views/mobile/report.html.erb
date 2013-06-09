@@ -1,0 +1,17 @@
+<h3>Report an Incident</h3>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div id="current">Initializing...</div>
+        <div id="map_canvas" style="width:274px; height:300px"></div>
+        <%= form_tag(report_path, :method=>'post') do %>
+          <%= label_tag "description" %>
+          <%# text_area "description", :size => "20x20" %>
+          <textarea cols="30" id="description" name="description" class="input-xlarge"rows="3"></textarea>
+
+          <%= hidden_field_tag "latitude" %>
+          <%= hidden_field_tag "longitude" %>
+          <%= label_tag "" %>
+          <%= submit_tag "Submit", :class => "btn btn btn-success" %>
+        <% end %>
+    </div>
+</div>
