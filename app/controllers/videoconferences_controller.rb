@@ -3,7 +3,7 @@ class VideoconferencesController < ApplicationController
   def index
   end
 
-  def new
+  def join_queue
      Pusher['queue'].trigger('add', {:type => params[:type], :id => @current_user.id })
      render :nothing => true
   end

@@ -28,9 +28,20 @@ var Application = {
 			});
 		}
 
+		function joinQueue(type) {
+			$.ajax({
+				url: "/joinqueue",
+				type: "POST",
+				data: {
+					type: type				
+				}
+			})
+		}
+
 		function actualInit(id) {
-			console.log("---Application Actual Init");
-			ApplicationView = new ApplicationView(id);
+			console.log("---Application Actual Init--");
+			// join the queue
+			applicationView = new ApplicationView(id);
 			pusherConnection = new PusherConnection(id),
 
 			this.partnerDisconnected = function() {
@@ -52,6 +63,7 @@ var Application = {
 					console.log("GOT IP");
 					ip = data.ip;
 					retrieveId();
+					joinQueue("savee");
 					actualInit(id);
 				},
 				error : function(){
@@ -67,6 +79,7 @@ var Application = {
 		});
 
 		$("#saviour").click(function() {
+			joinQueue("saviour");
 			if(id != null) {
 				actualInit(id);
 			} else {

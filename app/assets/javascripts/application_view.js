@@ -1,5 +1,5 @@
 var ApplicationView = function(id){
-
+	console.log("Application View Created");
 	messageView = new MessageView(id);
 
 	return {

@@ -1,6 +1,7 @@
 Saveme::Application.routes.draw do
   resources :message, :only => ['create']
   resources :videoconferences, :only => ['index']
+  match "/join-queue" => "videoconferences#join_queue"
 
   match 'people' => "people#create", :via => ["post"]
 
