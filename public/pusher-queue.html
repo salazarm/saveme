@@ -5,12 +5,10 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 </head>
 <body>
-	<div style="clear: both;" id="savees">
-		<div style="width: 50%; float:left;">
-
+	<div style="clear: both;">
+		<div style="width: 50%; float: left;" id="savees">
 		</div>
-		<div style="width:50%;" id="saviours">
-
+		<div style="width:50%; float: left;" id="saviours">
 		</div>
 	</div>
 	<script>
@@ -52,18 +50,19 @@
 		function tryToConnect() {
 			if (saviours.length !== 0 && savees.length !== 0){
 				connect(saviours.shift(), savees.shift());
+				$("#saviours").children().first().remove();
+				$("#savees").children().first().remove();
 			}
 		}
 
-		console.log("binding add");
-		channel.bind('add', function(data) {
-			console.log('in add')
+		channel.bind('client-add', function(data) {
+			console.log('in add');
 	  	if (data.type == 'savee') {
 	  		savees.push(data.id);
-	  		$("#savees").append(data+"<br />");
+	  		$("#savees").append("<div>"+data+"</div>");
 	  	} else if (data.type == 'saviour') {
 	  		saviours.push(data.id)
-	  		$("#saviours").append(data+"<br />");
+	  		$("#saviours").append("<div>"+data+"</div>");
 	  	}
 	  	tryToConnect();
 	  });

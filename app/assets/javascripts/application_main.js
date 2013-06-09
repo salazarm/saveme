@@ -5,20 +5,23 @@ var Application = {
 	pusherConnection: null,
 
 	init: function(person_id){
+		console.log("--Application Init---");
 		var id = person_id;
 		var ip;
 
 		function retrieveId(){
+			console.log("--- Application retrieve Id ---")
 			$.ajax({
 				type: "POST",
 				url: "/people",
 				async: false,
 				data: {
-					person {
+					person : {
 						ip: ip,
 						is_anon: true
 					},
-				}
+				},
+
 				success: function(data){
 					id = data.id;
 				}
@@ -26,6 +29,7 @@ var Application = {
 		}
 
 		function actualInit(id) {
+			console.log("---Application Actual Init");
 			ApplicationView = new ApplicationView(id);
 			pusherConnection = new PusherConnection(id),
 
@@ -41,18 +45,26 @@ var Application = {
 
 		$("#savee").click(function() {
 			// create an anonymous person
-			$.get({
+			console.log("SAVEE CLICK");
+			$.ajax({
 				url: "http://jsonip.appspot.com/", 
 				success: function(data, status, jqXHR){
+					console.log("GOT IP");
 					ip = data.ip;
 					retrieveId();
 					actualInit(id);
 				},
 				error : function(){
+					ip = "Get Ip failed";
+					console.log("Get IP Failure");
+					retrieveId();
+					actualInit(id);
 					//TODO: Handle error
-				}
+				},
+
 				async : false
-			});
+			})
+		});
 
 		$("#saviour").click(function() {
 			if(id != null) {
@@ -61,9 +73,7 @@ var Application = {
 				retrieveId();
 				actualInit(id);
 			}
-		})
+		});
 
-	},
-
-
+	}
 }

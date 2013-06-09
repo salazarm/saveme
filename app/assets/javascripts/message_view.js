@@ -5,7 +5,7 @@ var MessageView = function(id){
 
 	return {
 		newMessage: function(message){
-			messages.append(messageTemplate(message)
+			messages.append(messageTemplate(message));
 		}
 	}
 }

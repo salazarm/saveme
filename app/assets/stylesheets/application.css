@@ -12,6 +12,56 @@
  *= require_tree .
  */
 
+
+html {
+	min-height: 100%;
+	margin: 0;
+	padding: 0;
+ 	background-color: #FFE39C;
+ 	font-family: 'Open Sans';
+}
+ body {
+ 	padding: 0;
+ 	margin: 0;
+	background-color: inherit;
+ }
+
+ #nav-bar {
+ 	min-width: 600px;
+ 	clear: both;
+ 	height: 30px;
+ 	margin: 0;
+	color: #444;
+	padding: 10px 20px 11px 20px;
+	background-color: #8BD6A0;
+	font-size: 24px;
+}
+
+#nav-bar .nav-text{
+	line-height: 40px;
+}
+
+#login {
+	padding: 2px 5px;
+	background-color: #F3F757;
+	color: #2E7544;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+#login:hover {
+		background-color: #2E7544;
+		color: #F3F757;
+}
+
+ .left {
+ 	float: left;
+ }
+
+ .right {
+ 	float: right;
+ }
+
 .sbutton {
 	cursor: pointer;
 	-moz-box-shadow:inset 0px 1px 0px 0px #caefab;

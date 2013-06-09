@@ -5,10 +5,36 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
 </head>
 <body>
+	<div id="nav-bar">
+		<div class="left nav-text">
+			Saviour
+		</div>
+		<div class="right nav-text">
+			<span id="login">Login</span>
+		</div>
+	</div>
 
 <%= yield %>
 
+ <script type="text/javascript">
+    _.templateSettings = {
+        interpolate: /\[\[\=(.+?)\]\]/g,
+        evaluate: /\[\[(.+?)\]\]/g
+    };
+</script>
+
+<script type="text/template" id="messages">
+	
+</script>
+
+
+
 </body>
+<script>
+	Application.init();
+</script>
 </html>

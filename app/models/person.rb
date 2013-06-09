@@ -3,7 +3,7 @@ class Person < ActiveRecord::Base
   attr_accessible :image, :ip, :is_anon, :name, :password, :password_confirmation, :email
   attr_accessor :password, :password_confirmation
 
-  before_create { generate_token(:auth_token) }, :unless => "is_anon"
+  before_create { generate_token(:auth_token) }
 
   before_validation :downcase_email
 
@@ -15,6 +15,12 @@ class Person < ActiveRecord::Base
   validates :email, :uniqueness => true, 
               :format => {:with => VALID_EMAIL_REGEX },
               :unless => "is_anon"
+
+  def generate_token(column)
+    begin
+      self[column] = SecureRandom.urlsafe_base64
+    end while Person.exists?(column => self[column]) 
+  end
 
   def password=(password_str)
     @password = password_str

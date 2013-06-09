@@ -5,7 +5,7 @@ var ApplicationView = function(id){
 	return {
 	 	newMessage: function(message){
 	 		messagesView.append(message);
-	 	}
+	 	},
 
 	 	closeConnection: function(){
 	 		// TODO: CHANGE VIEW
