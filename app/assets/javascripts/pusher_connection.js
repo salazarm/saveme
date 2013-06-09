@@ -18,7 +18,7 @@ var PusherConnection = function(id, _view) {
 		view.newMessage( {message: text, self: true } );
 		$("#message-box").val('');
 		return false;
-	})
+	});
 
 
 	console.log("binded to private-token");
