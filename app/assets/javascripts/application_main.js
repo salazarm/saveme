@@ -31,13 +31,15 @@ var Application = {
 		}
 
 		function joinQueue(type) {
-			$.ajax({
-				url: "/joinqueue",
-				type: "POST",
-				data: {
-					type: type				
-				}
-			});
+			setTimeout(function(){
+				$.ajax({
+					url: "/joinqueue",
+					type: "POST",
+					data: {
+						type: type				
+					}
+				});
+			}, 1000);
 		}
 
 		function actualInit(id) {

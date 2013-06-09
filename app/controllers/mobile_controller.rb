@@ -23,5 +23,6 @@ class MobileController < ActionController::Base
   end
 
   def respond
+    @incidentReports = IncidentReport.all.reverse
   end
 end
