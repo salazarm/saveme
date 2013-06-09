@@ -19,11 +19,15 @@ class TwilioController < ApplicationController
 
       if people.present?
         person = people.first
+        initiator_id = params[:From]
+        responder_id = person.phone
         msg = Twilio::TwiML::Response.new do |r|
-          r.Dial "+1#{person.phone}", :action => '/help_me/call_ended'
+          r.Dial responder_id, :action => '/help_me/call_ended'
           r.Say 'The call failed or the remote party hung up. Goodbye.'
         end.text
         person.in_call = true
+        person.save
+        CommunicationRecord.create!({:initiator_id => initiator_id, :responder_id => responder_id})
         render :xml => msg
       else
         none_available
@@ -34,19 +38,15 @@ class TwilioController < ApplicationController
   end
 
   def call_ended
-    debugger; 0
-  end
+    initiator_id = params[:From]
 
-=begin
-  def incoming_sms
-    debugger; 0
-    twiml = Twilio::TwiML::Response.new do |r|
-      r.Sms "Hey Monkey. Thanks for the message!"
-    end
-    twiml.text
-    render :xml => twiml.text
+    responder_id = CommunicationRecord.where(:initiator_id => initiator_id).last.responder_id
+    responder = Person.where(:phone => responder_id).first
+    Person.update(responder.id, :in_call => false)
+
+    render :nothing => true
+
   end
-=end
 
   protected
 

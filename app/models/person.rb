@@ -7,6 +7,8 @@ class Person < ActiveRecord::Base
   has_one :schedule
   has_many :videoconferences
   has_and_belongs_to_many :incident_reports
+  has_many :communication_records
+
 
   before_validation :downcase_email
 
