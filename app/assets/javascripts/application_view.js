@@ -5,7 +5,10 @@ var ApplicationView = function(id){
 	var hintView;
 	if (Application.type == 2){
 		hintView = new HintView();
-	}
+	} else {
+    $('#requester_hints').show();
+    $('#requester_tips').show();
+  }
 	$("#main").slideUp(500);
 	$("#spinner").slideDown(500);
 	return {
