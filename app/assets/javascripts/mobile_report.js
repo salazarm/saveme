@@ -31,8 +31,8 @@ function showPosition(p)
 {
   var latitude = parseFloat( p.coords.latitude );
   var longitude = parseFloat( p.coords.longitude );
-  $('#latitude').val(latitude);
-  $('#longitude').val(longitude);
+  $('#incident_report_latitude').val(latitude);
+  $('#incident_report_longitude').val(longitude);
   var pos=new google.maps.LatLng( latitude , longitude);
   map.setCenter(pos);
   map.setZoom(14);
