@@ -1,7 +1,7 @@
 var ApplicationView = function(id){
 	console.log("Application View Created");
 	messageView = new MessageView(id);
-
+	$("#main").slideUp(500);
 	return {
 	 	newMessage: function(message){
 	 		messagesView.append(message);

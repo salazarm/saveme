@@ -19,22 +19,24 @@
 		var savees = [];
 
 		function connect(saviour, savee) {
+			console.log(saviour);
+			console.log(savee);
 			$.ajax({
 				type: "POST",
 				url: "/videoconference",
 				data: {
 					videoconference: {
-						savee_id: savee.id,
-						saviour_id: saviour.id
+						savee_id: savee,
+						saver_id: saviour
 					}
 				},
 				success: function(data, status, jqXHR) {
-					channel.trigger(saviour.id, 
+					channel.trigger('client-'+saviour, 
 						{
 							session: data.token
 						}
 					);
-					channel.trigger(savee.id, 
+					channel.trigger('client-'+savee, 
 						{
 							session: data.token
 						}
