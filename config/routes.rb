@@ -8,6 +8,7 @@ Saveme::Application.routes.draw do
   root :to => "videoconferences#index"
 
   match "/pusher/auth" => "pusher#auth"
+  match '/help_me'     => 'twilio#help_me'
   match '/hello-monkey' => 'twilio#hello_monkey', :as => 'hello_monkey'
   match '/hello-monkey/handle-gather' => 'twilio#handle_gather', :as => 'handle_gather'
 

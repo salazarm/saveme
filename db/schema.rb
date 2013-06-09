@@ -28,9 +28,10 @@ ActiveRecord::Schema.define(:version => 20130609045134) do
     t.string   "image"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "phone"
     t.string   "email"
     t.string   "auth_token"
-    t.string   "phone"
+    t.boolean  "in_call"
   end
 
   create_table "schedules", :force => true do |t|
