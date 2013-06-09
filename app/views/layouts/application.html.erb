@@ -15,7 +15,7 @@
   <script src="http://js.pusher.com/2.0/pusher.min.js" type="text/javascript"></script>
 </head>
 <body style="background: url('http://uexel.us/themes/majoo/images/bg/brushed_alu.png') repeat scroll #f4f4f4; height: auto;">
-  <script>window.person_id=<%=@current_user? @current_user.id : ''%>;</script>
+  <script>window.person_id=<%=@current_user? @current_user.id : ''%> || '';</script>
 	<div id="nav-bar">
 		<div class="pull-left">
 			<h3>Saviour</h3>
