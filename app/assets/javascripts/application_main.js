@@ -4,7 +4,7 @@ var Application = {
 	messageView: null,
 	pusherConnection: null,
 
-	init: function(person_id) {
+	init: function() {
 		console.log("--Application Init---");
 		var id = window.person_id;
 		var ip;

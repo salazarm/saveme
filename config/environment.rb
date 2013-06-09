@@ -2,9 +2,9 @@
 require File.expand_path('../application', __FILE__)
 
 require 'pusher'
-Pusher.app_id = 46055
-Pusher.key = '15d403a27437d1df3be4'
-Pusher.secret = 'b597c32148bc85ca03a0'
+Pusher.app_id = 46082
+Pusher.key = '9b7d7a30e65884a707d6'
+Pusher.secret = '579eeaea2734d24801b2'
 Pusher.logger = Rails.logger
 
 # Initialize the rails application

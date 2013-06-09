@@ -1,19 +1,31 @@
 var PusherConnection = function(id, _view) {
-	var pusher = new Pusher('15d403a27437d1df3be4');
+	var pusher = new Pusher('9b7d7a30e65884a707d6');
 	console.log("on ", {"channel: ": id })
 	var channel = pusher.subscribe("client-"+id);
 	var messageChannel;
 	var messages = [];
-	var messageView;
 	var _sendMessage;
 	var other;
 	var conferenceSession;
 	var view = _view;
+	var PC = this;
 
+	$("#textsubmit").click(function(ev){
+		ev.preventDefault();
+
+		console.log($("#message-box"));
+		PC.sendMessage( $("#message-box").val());
+		$("#message-box").val('');
+		return false;
+	})
+
+	console.log("binded to private-token");
 	channel.bind("private-token", function(data) {
+		$("#spinner").hide();
+		$("#messaging").slideDown(100);
 		console.log({'got token: ': data.token});
 		conferenceSession = data.token;
-		messageChannel = pusher.subscribe('client-'+conferenceSession);
+		messageChannel = pusher.subscribe('private-'+conferenceSession);
 		
 		console.log("Binded to messages");
 		messageChannel.bind('client-message', function(data){
@@ -38,14 +50,10 @@ var PusherConnection = function(id, _view) {
 				return 'a';
 			}
 
-		_sendMessage = function(message){
+		console.log("added sendMessage");
+		PC.sendMessage = function(message){
 			console.log("message sent");
 			messageChannel.trigger('client-message', { message: message });
 		}
 	});
-
-
-	return {
-		sendMessage : _sendMessage
-	};
 }

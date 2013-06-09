@@ -6,14 +6,21 @@
 </head>
 <body>
 	<div style="clear: both;">
-		<div style="width: 50%; float: left;" id="savees">
+		<h1> THE PSEUDO SERVER </h1>
+		<h2> Queueing Edition </h2>
+		<div style="width: 50%; float: left;">
+			<h3>NEED SAVING</h3>
+			<div id="savees"></div>
 		</div>
-		<div style="width:50%; float: left;" id="saviours">
+		<div style="width:50%; float: left;">
+			<h3> READY TO SAVE </h3>
+			<div id="saviours"></div>
 		</div>
 	</div>
 	<script>
 	var SQueue = function(){
-		var pusher = new Pusher('15d403a27437d1df3be4');
+		console.log("Queue Server Started");
+		var pusher = new Pusher('9b7d7a30e65884a707d6');
 		var channel = pusher.subscribe('private-queue');
 		var saviours = [];
 		var savees = [];
