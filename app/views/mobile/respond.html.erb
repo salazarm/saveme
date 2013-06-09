@@ -1,14 +1,11 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
-
 <% if @incidentReports.length <= 0 %>
 <div class="container">
 	There are no incidents to respond to !
 </div>
 <% else %>
-
 	<div id="map-canvas" class="awesome-box" style="margin: 20px auto; width: 600px; height: 600px; border-radius: 200px;"></div>
 <% end %>
-
 <script type="text/template" id="google-popup-template">
   <div><strong>[[= description ]]</strong></div>
   <div>[[= people.length==0? "Be the first to aid this person!" :"<span class='number'>"+people.length+"</span> going to aid this person, join them?" ]]</div>
@@ -23,7 +20,6 @@ _.templateSettings = {
     interpolate: /\[\[\=(.+?)\]\]/g,
     evaluate: /\[\[(.+?)\]\]/g
 	};
-
 	$(".helper-button").click(function(){
 		var id = this.data('id');
 		$.ajax({
@@ -34,7 +30,6 @@ _.templateSettings = {
 			type: "POST"
 		});
 	});
-
 <% if @incidentReports.length > 0 %>
 	$(document).ready(function(){
 	  function initialize() {   
@@ -45,7 +40,6 @@ _.templateSettings = {
 	    };
 	    var map = new google.maps.Map(document.getElementById("map-canvas"),
 	        mapOptions);
-
 	    var infowindow = new google.maps.InfoWindow();
 	    var g_template = _.template($("#google-popup-template").html());
 	    <% @incidentReports.each_with_index do |listing, index| %>
@@ -54,35 +48,24 @@ _.templateSettings = {
 	        icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=<%= index + 1%>|B9CCEB|000000',
 	        map: map,
 	      });
-
 	      console.log(<%= raw listing.to_json(:include => :people ) %>);
 	      var content = g_template(<%= raw listing.to_json(:include => :people ) %>);
-
 	      makeInfoWindowEvent(map, infowindow, content, marker, <%= listing.id %>);
-
-
-	        
 	    <% end %>
   }
   google.maps.event.addDomListener(window, 'load', initialize);
-
   function makeInfoWindowEvent(map, infowindow, contentString, marker, id) {
     google.maps.event.addListener(marker, 'click', function() {
       infowindow.setContent(contentString);
       infowindow.open(map, marker);
     });
-
     google.maps.event.addListener(marker, 'mouseover', function() {
       $('#'+id).css('background-color','#f9f9f9')
     });
-
     google.maps.event.addListener(marker, 'mouseout', function() {
       $('#'+id).css('background-color','#ffffff')
     });
-  
-
   }
-
-  });
+});
 <% end %>
 </script>

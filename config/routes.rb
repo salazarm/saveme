@@ -5,7 +5,7 @@ Saveme::Application.routes.draw do
   match "/videoconference" => "videoconferences#create"
   match 'people' => "people#create", :via => ["post"]
   match "/login" => "sessions#create", :via => ["post"]
-  match "/logout" => "session#destroy"
+  match "/logout" => "sessions#destroy"
 
   root :to => "videoconferences#index"
 

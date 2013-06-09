@@ -34,6 +34,32 @@ html {
 	font-family: 'Lato', sans-serif;
  }
 
+#user-drop-down {
+	display: none;
+	background-color: rgba(119, 212, 42, .8);
+	padding: 10px;
+	position: absolute;
+}	
+
+.green-nav {
+	background-color: rgba(119, 212, 42, .8);
+}
+
+#user-drop-down li:hover {
+	background-color: rgba(255,255,255,.4);
+}
+
+ #user-name {
+ 	padding: 3px 6px;
+ 	background-color: rgba(255,255,255,.2);
+ 	border-radius: 7px;
+ 	cursor: pointer;
+ }
+
+ #user-name:hover {
+ 	background-color: rgba(255,255,255,.4);
+ }
+
 	#login-popup, #signup-popup {
 		background-color: rgba(100,100,10,.3);
 		padding: 10px;

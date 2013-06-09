@@ -21,11 +21,17 @@
 			<h3>Saviour</h3>
 		</div>
   </div>
-    <div class="right nav-text" id="user-logged-in" style='display: <%= @current_user && !@current_user.is_anon ? "block;" : "none;" %>'>
-      <div id="user-name">
+    <div class="right nav-text menu-hover-hack" id="user-logged-in" style='display: <%= @current_user && !@current_user.is_anon ? "block;" : "none;" %>; margin-top: -30px; margin-right: 5%; color: #fff; font-size: 18px;'>
+      Logged in as <span id="user-name" class="menu-hover-hack">
         <%= @current_user && !@current_user.is_anon ? @current_user.name : "" %>
-      </div>
+      </span>
+         <ul id="user-drop-down" class="menu-hover-hack pull-right" style="position: absolute; margin-top: -2px; right: 4%;">
+          <div><a href="/profile">Your Profile</a></div>
+          <div><a href="/leaderboards">Leaderboards</a></div>
+          <div><a href="/logout">Logout</a></div>
+        </ul>
     </div>
+ 
 		<div class="right nav-text" id="auth" style='display: <%= !@current_user || @current_user.is_anon ? "block;" : "none;" %>; margin-top: -60px; margin-right: 5%;'>
 			<span id="login" class="btn btn-success">Login</span>
       <ul id="login-popup" style="display: none; position: absolute; margin-left: -160px; width: 220px; padding-top:15px; margin-top:5px;">
@@ -55,6 +61,11 @@
 <%= yield %>
 <script type="text/javascript" src="//api.filepicker.io/v1/filepicker.js"></script>
 <script>
+$(".menu-hover-hack, #user-name").hover(function(){
+  $("#user-drop-down").slideDown(100);
+}, function(){
+  $("#user-drop-down").slideUp(100);
+})
   var profile_image ='';
   filepicker.setKey("ANiojec3SRKijkj9dvLmGz");
   $("#signup-image").click(function(){
@@ -102,6 +113,7 @@
     var name = $("#signup-name").val();
     var password = $("#signup-password").val();
     var confirm = $("#signup-confirm").val();
+    console.log(email + name + password + confirm);
     $.ajax({
       url: "/people",
       type: "POST",
@@ -113,21 +125,22 @@
           name : name,
           image: profile_image 
         }, 
+      },
 
-        success : function(){
-          console.log("SUCCESS LOGIN");
-          $("#signup-email").val('');
-          $("#signup-name").val('');
-          $("#signup-password").val('');
-          $("#signup-confirm").val('');
-          $("#profile-image").html('');
-          $("#close").trigger("click");
-          $("#auth").hide();
-        },
+      success : function(data, status, jqXHR){
+        $("#signup-email").val('');
+        $("#signup-name").val('');
+        $("#signup-password").val('');
+        $("#signup-confirm").val('');
+        $("#profile-image").html('');
+        $("#close").trigger("click");
+        $("#auth").hide();
+        $("#user-logged-in").show();
+        $("#user-name").html(data.name);
+      },
 
-        error : function(){
-          console.log("ERROR SIGNUP");
-        }
+      error : function(){
+        console.log("ERROR SIGNUP");
       }
     });
   });
@@ -148,6 +161,10 @@
         $("login-password").val('');
         $("#user-logged-in").show();
         $("#user-name").html(data.name);
+      },
+
+      error : function(error){
+        console.log("LOGIN ERROR");
       }
     });
   });
