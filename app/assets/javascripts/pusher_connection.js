@@ -39,8 +39,8 @@ var PusherConnection = function(id, _view) {
 
 		console.log("Binded to disconnects");
 		messageChannel.bind('client-disconnect', function(data){
-			console.log("other person dc.")
-			view.partnerDisconnected();
+			console.log("other person dc.");
+			alert("partner disconnected");
 		});
 
 		messageChannel.bind('client-video-on', function(){
@@ -53,9 +53,15 @@ var PusherConnection = function(id, _view) {
 
 		// Handle user disconnecting
 		window.onbeforeunload = function(e){
-				messageChannel.trigger('client-disconnect', function(d){})
-
-				//TODO: ADD RATE SAVIOUR RATING MODAL AND ALERT
+				messageChannel.trigger('client-disconnect', {});
+				var helpful = prompt("Was this person helpful? [y/n]","n");
+				$.ajax({
+					url:  "/",
+					data: {
+						
+					},
+					
+				})
 				if(e){
 					e.returnValue = '';
 				}

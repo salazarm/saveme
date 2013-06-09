@@ -1,4 +1,5 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+<%= @current_user && !@current_user.is_anon ? @current_user.name : "gayyyy" %>
 <% if @incidentReports.length <= 0 %>
 <div class="container">
 	There are no incidents to respond to !
@@ -9,7 +10,7 @@
 <script type="text/template" id="google-popup-template">
   <div><strong>[[= description ]]</strong></div>
   <div>[[= people.length==0? "Be the first to aid this person!" :"<span class='number'>"+people.length+"</span> going to aid this person, join them?" ]]</div>
-  <% if @current_user && !@current_user.isAnon %> 
+  <% if @current_user && @current_user.ip != "troll" %> 
 	  <button class="helper-button" data-id="[[= id ]]"class="btn btn-success">Aid this person!</button>
   <% else %>
   	<div style="padding: 10px 0px; backgrround-color: ">Signup above to let your fellow samaritans know that you are coming to aid this person!</div>
@@ -25,7 +26,7 @@ _.templateSettings = {
 		$.ajax({
 			url: "/mobile/help",
 			data: {
-				id : id
+				id : id,
 			},
 			type: "POST"
 		});

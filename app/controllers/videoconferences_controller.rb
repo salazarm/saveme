@@ -26,4 +26,19 @@ class VideoconferencesController < ApplicationController
     end
   end
 
+  def end_call
+    @videoconference = Videoconference.find_by_id(params[:conf_id])
+    duration = Time.now - @videoconference.created_at
+    cr = CommunicationRecord.new({ 
+        :initiator => @videoconference.savee,
+        :responder => @videoconference.saver,
+        :rating => @params[:rating],
+        :duration => duration
+      })
+    if cr.save
+      render :nothing => true, :status => 200
+    else
+      render :nothing => true, :status => 500
+    end
+  end
 end

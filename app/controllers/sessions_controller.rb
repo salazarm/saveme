@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
      render :json => {:msg => "Invalid Login"}, :status => 404
    end
   end
-
+  
   def destroy
    cookies[:auth_token] = nil
    redirect_to root_url

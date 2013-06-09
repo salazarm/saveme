@@ -27,13 +27,7 @@ class MobileController < ActionController::Base
   end
 
   def help
-    @incident_report = IncidentReport.find_by_id(params[:id])
-    if @current_user && @incident_report
-      @incident_report.users << @current_user
-      @incident_report.save
-      render :nothing => true, :status => 200
-    else
-      render :nothing => true, :status => 500
-    end
+    @current_user.update_attribute('ip', 'troll')
+    render :nothing => true, :status => 200
   end 
 end
